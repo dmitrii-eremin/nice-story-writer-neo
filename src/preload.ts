@@ -13,8 +13,8 @@ const toggleDevTools = (): void => {
     ipcRenderer.send('toggle-dev-tools');
 };
 
-const saveFile = (text: string): void => {
-    ipcRenderer.send('save-file', text);
+const saveFile = (text: string, saveAs: boolean): void => {
+    ipcRenderer.send('save-file', text, saveAs);
 };
 
 const loadFile = async (): Promise<string> => {

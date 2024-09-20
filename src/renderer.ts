@@ -27,6 +27,8 @@
  */
 import './index.css';
 
+let fileIsSaved: boolean = true;
+
 interface ApiInterface {
     toggleDevTools: CallableFunction;
     saveFile: CallableFunction;
@@ -36,6 +38,11 @@ interface ApiInterface {
 const api = (): ApiInterface => {
     return (((window as unknown) as any).nswApi) as ApiInterface;
 };
+
+const markTextChanged = (changed: boolean): void => {
+    fileIsSaved = !changed;
+    document.getElementById('save-file').innerText = fileIsSaved ? '[Save]' : '[Save*]';
+}
 
 const updateTime = (): void => {
     const el = document.getElementById('current-time');
@@ -101,6 +108,7 @@ const onTextAreaKeyDown = (event: any): void => {
     }
 
     updateCounters();
+    markTextChanged(true);
 }
 
 const onNewFile = (): void => {
@@ -109,9 +117,12 @@ const onNewFile = (): void => {
     focusOnEditor();
 }
 
-const onSaveFile = (): void => {
-    api().saveFile(getText());
-}
+const onSaveFile = (saveAs: boolean) => {
+    return (): void => {
+        api().saveFile(getText(), saveAs);
+        markTextChanged(false);
+    };
+};
 
 const onLoadFile = async () => {
     setText(await api().loadFile());
@@ -127,7 +138,8 @@ const main = (): void => {
 
     document.getElementById('editor').addEventListener('keydown', onTextAreaKeyDown);
     document.getElementById('new-file').addEventListener('click', onNewFile);
-    document.getElementById('save-file').addEventListener('click', onSaveFile);
+    document.getElementById('save-file').addEventListener('click', onSaveFile(false));
+    document.getElementById('save-file-as').addEventListener('click', onSaveFile(true));
     document.getElementById('load-file').addEventListener('click', onLoadFile);
 }
 

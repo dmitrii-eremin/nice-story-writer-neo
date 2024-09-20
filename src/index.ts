@@ -15,6 +15,7 @@ if (require('electron-squirrel-startup')) {
 }
 
 let mainWindow: BrowserWindow | undefined = undefined;
+let lastFilename: string | undefined = undefined;
 
 const createWindow = (): void => {
   // Create the browser window.
@@ -65,29 +66,32 @@ ipcMain.on('toggle-dev-tools', (event, args) => {
   }
 });
 
-ipcMain.on('save-file', async (event, data: string) => {
+ipcMain.on('save-file', async (event, data: string, saveAs: boolean) => {
   if (mainWindow === undefined) {
     return;
   }
 
-  const options = {
-    title: 'Save File',
-    defaultPath: path.join(os.homedir(), 'new story.md'),
-    buttonLabel: 'Save',
-    filters: [
-      { name: 'Markdown Files', extensions: ['md'] },
-      { name: 'Text Files', extensions: ['txt'] },
-      { name: 'All Files', extensions: ['*'] }
-    ]
-  };
-
-  const dialogResult = await dialog.showSaveDialog(mainWindow, options);
-  if (dialogResult.canceled) {
-    return;
+  if (saveAs || lastFilename === undefined) {
+    const options = {
+      title: 'Save File',
+      defaultPath: path.join(os.homedir(), 'new story.md'),
+      buttonLabel: 'Save',
+      filters: [
+        { name: 'Markdown Files', extensions: ['md'] },
+        { name: 'Text Files', extensions: ['txt'] },
+        { name: 'All Files', extensions: ['*'] }
+      ]
+    };
+  
+    const dialogResult = await dialog.showSaveDialog(mainWindow, options);
+    if (dialogResult.canceled) {
+      return;
+    }
+    lastFilename = dialogResult.filePath;
   }
   
   try {
-    fs.writeFileSync(dialogResult.filePath, data);
+    fs.writeFileSync(lastFilename, data);
   }
   catch (err) {
     alert(`Nice Story Writer was not able to save the file. Details: ${err}`);
