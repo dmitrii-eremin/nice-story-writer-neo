@@ -94,17 +94,22 @@ const insertToText = (element: HTMLInputElement, text: string): void => {
 const onTextAreaKeyDown = (event: any): void => {
     const element: HTMLInputElement = document.getElementById('editor') as HTMLInputElement;
 
+    console.log("event = ", event);
+
     if (event.keyCode === 9) {
         insertToText(element, '    ');
         event.preventDefault();
     }
-    else if (event.keyCode === 120) {
+    else if (event.key === 'F9') {
         const timestamp = new Date();
         insertToText(element, timestamp.toLocaleString());
         event.preventDefault();
     }
-    else if (event.keyCode === 123) {
+    else if (event.key === 'F12') {
         api().toggleDevTools();
+    }
+    else if ((event.key === 'F5') || ((event.ctrlKey || event.metaKey) && event.key === 's')) {
+        onSaveFile(false)();
     }
 
     updateCounters();
@@ -115,6 +120,7 @@ const onNewFile = (): void => {
     setText('');
     updateCounters();
     focusOnEditor();
+    markTextChanged(false);
 }
 
 const onSaveFile = (saveAs: boolean) => {
