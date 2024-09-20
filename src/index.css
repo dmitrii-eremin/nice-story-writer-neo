@@ -1,0 +1,104 @@
+html, body
+{
+    min-height: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+body
+{
+    background-color: black;
+    color: #fff;
+}
+
+footer, header
+{
+    background-color: #101010;
+    color: #404040;
+    font-family: "Hack", "Courier New", "monospace";
+    font-size: 1rem;
+    position: relative;
+}
+
+
+header
+{
+    margin-top: -2rem;
+    height: 2rem;
+}
+
+footer
+{
+    margin-bottom: -1.9rem;
+    height: 2rem;
+}
+
+footer span:not(:first-child), header span:not(:first-child)
+{
+    margin-left: 3rem;
+}
+
+section
+{
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+.status-bar
+{
+    margin: 0;
+    margin-left: 1rem;
+    position: absolute;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+
+    width: 95%;
+}
+
+.status-bar .right
+{
+    position: absolute;
+    right: 1rem;
+}
+
+.status-bar a
+{
+    color: #404040;
+    text-decoration: none;
+}
+
+.main-editable-area
+{
+    width: 900px;
+    margin: 0 auto;
+    height: 100%;
+}
+
+.main-editable-area textarea
+{
+    background: black;
+    color: #B3A000;
+    font-family: "Hack", "Courier New", "monospace";
+    font-size: 1.2rem;
+    width: 100%;
+    height: 100%;
+    border-style: none;
+    border-color: transparent;
+    resize: none;
+    outline: none;
+    padding-top: 2rem;
+
+    overflow: -moz-scrollbars-none;
+    -ms-overflow-style: none;
+}
+
+.main-editable-area textarea::-webkit-scrollbar
+{
+    width: 0 !important;
+}

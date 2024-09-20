@@ -1,0 +1,47 @@
+{
+  "name": "nice-story-writer",
+  "productName": "Nice Story Writer",
+  "version": "2.1.7",
+  "description": "Discover a beautifully simple writing experience with Nice Story Writer, the distraction-free text editor designed for writers who crave focus. With its clean, minimalistic interface, you can immerse yourself in your work without the clutter of unnecessary features. Whether you're working on a novel, essay, or just jotting down notes, Nice Story Writer offers a peaceful, efficient space for your thoughts to flow. Focus on what matters — your writing. Download Nice Story Writer today and unlock the freedom of a truly minimalist writing experience.",
+  "main": ".webpack/main",
+  "scripts": {
+    "start": "electron-forge start",
+    "package": "electron-forge package",
+    "make": "electron-forge make",
+    "publish": "electron-forge publish",
+    "lint": "eslint --ext .ts,.tsx ."
+  },
+  "devDependencies": {
+    "@electron-forge/cli": "^7.5.0",
+    "@electron-forge/maker-deb": "^7.5.0",
+    "@electron-forge/maker-rpm": "^7.5.0",
+    "@electron-forge/maker-squirrel": "^7.5.0",
+    "@electron-forge/maker-zip": "^7.5.0",
+    "@electron-forge/plugin-auto-unpack-natives": "^7.5.0",
+    "@electron-forge/plugin-fuses": "^7.5.0",
+    "@electron-forge/plugin-webpack": "^7.5.0",
+    "@electron/fuses": "^1.8.0",
+    "@typescript-eslint/eslint-plugin": "^5.62.0",
+    "@typescript-eslint/parser": "^5.62.0",
+    "@vercel/webpack-asset-relocator-loader": "^1.7.3",
+    "css-loader": "^6.11.0",
+    "electron": "32.1.2",
+    "eslint": "^8.57.1",
+    "eslint-plugin-import": "^2.30.0",
+    "fork-ts-checker-webpack-plugin": "^7.3.0",
+    "node-loader": "^2.0.0",
+    "style-loader": "^3.3.4",
+    "ts-loader": "^9.5.1",
+    "ts-node": "^10.9.2",
+    "typescript": "~4.5.4"
+  },
+  "keywords": [],
+  "author": {
+    "name": "Dmitrii, Eremin",
+    "email": "erem.dmitrii@gmail.com"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "electron-squirrel-startup": "^1.0.1"
+  }
+}
