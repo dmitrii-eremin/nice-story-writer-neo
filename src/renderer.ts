@@ -125,7 +125,12 @@ const onSaveFile = (saveAs: boolean) => {
 };
 
 const onLoadFile = async () => {
-    setText(await api().loadFile());
+    const text: string = await api().loadFile();
+    if (text === undefined) {
+        return;
+    }
+
+    setText(text);
     updateCounters();
     focusOnEditor();
 }

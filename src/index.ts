@@ -16,6 +16,7 @@ if (require('electron-squirrel-startup')) {
 
 let mainWindow: BrowserWindow | undefined = undefined;
 let lastFilename: string | undefined = undefined;
+let lastFolder: string = os.homedir();
 
 const createWindow = (): void => {
   // Create the browser window.
@@ -74,7 +75,7 @@ ipcMain.on('save-file', async (event, data: string, saveAs: boolean) => {
   if (saveAs || lastFilename === undefined) {
     const options = {
       title: 'Save File',
-      defaultPath: path.join(os.homedir(), 'new story.md'),
+      defaultPath: path.join(lastFolder, 'story.md'),
       buttonLabel: 'Save',
       filters: [
         { name: 'Markdown Files', extensions: ['md'] },
@@ -91,6 +92,7 @@ ipcMain.on('save-file', async (event, data: string, saveAs: boolean) => {
   }
   
   try {
+    lastFolder = path.dirname(lastFilename);
     fs.writeFileSync(lastFilename, data);
   }
   catch (err) {
@@ -105,7 +107,7 @@ ipcMain.handle('load-file', async (event, args) => {
 
   const options = {
     title: 'Open File',
-    defaultPath: path.join(os.homedir(), '/'),
+    defaultPath: path.join(lastFolder, '/'),
     buttonLabel: 'Open',
     filters: [
       { name: 'Markdown Files', extensions: ['md'] },
@@ -119,9 +121,10 @@ ipcMain.handle('load-file', async (event, args) => {
     return;
   }
 
-  const filename: string = dialogResult.filePaths[0];
+  lastFilename = dialogResult.filePaths[0];
+  lastFolder = path.dirname(lastFilename);
   try {
-    return fs.readFileSync(filename, 'utf8');
+    return fs.readFileSync(lastFilename, 'utf8');
   }
   catch (err) {
     alert(`Nice Story Writer was not able to read the file. Details: ${err}`);
