@@ -43,7 +43,7 @@ const api = (): ApiInterface => {
 
 const markTextChanged = (changed: boolean): void => {
     fileIsSaved = !changed;
-    document.getElementById('save-file').innerText = fileIsSaved ? '[Save]' : '[Save*]';
+    document.getElementById('save-file').innerText = fileIsSaved ? '[Save | F5]' : '[Save*  | F5]';
 }
 
 const updateTime = (): void => {
@@ -163,7 +163,15 @@ const toggleMarkdown = (): void => {
 }
 
 const toggleMarkdownHotKey = (event: any): void => {
-    if (event.key == 'F9') {
+    if (event.key == 'F1') {
+        onNewFile();
+        event.preventDefault();
+    }
+    else if (event.key == 'F7') {
+        onLoadFile();
+        event.preventDefault();
+    }
+    else if (event.key == 'F9') {
         toggleMarkdown();
         event.preventDefault();
     }
