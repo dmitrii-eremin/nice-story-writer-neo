@@ -21,8 +21,8 @@ let lastFolder: string = os.homedir();
 const createWindow = (): void => {
   // Create the browser window.
   mainWindow = new BrowserWindow({
-    height: 600,
-    width: 1024,
+    height: 768,
+    width: 1280,
     webPreferences: {
       preload: MAIN_WINDOW_PRELOAD_WEBPACK_ENTRY,
     },

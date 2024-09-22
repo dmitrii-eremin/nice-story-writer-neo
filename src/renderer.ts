@@ -26,6 +26,7 @@
  * ```
  */
 import './index.css';
+import Showdown from 'showdown';
 
 let fileIsSaved: boolean = true;
 
@@ -33,6 +34,7 @@ interface ApiInterface {
     toggleDevTools: CallableFunction;
     saveFile: CallableFunction;
     loadFile: CallableFunction;
+    previewMarkdown: CallableFunction;
 };
 
 const api = (): ApiInterface => {
@@ -100,13 +102,10 @@ const onTextAreaKeyDown = (event: any): void => {
         insertToText(element, '    ');
         event.preventDefault();
     }
-    else if (event.key === 'F9') {
+    else if (event.key === 'F10') {
         const timestamp = new Date();
         insertToText(element, timestamp.toLocaleString());
         event.preventDefault();
-    }
-    else if (event.key === 'F12') {
-        api().toggleDevTools();
     }
     else if ((event.key === 'F5') || ((event.ctrlKey || event.metaKey) && event.key === 's')) {
         onSaveFile(false)();
@@ -141,6 +140,39 @@ const onLoadFile = async () => {
     focusOnEditor();
 }
 
+const convertToHtml = (markdown: string): string => {
+    return (new Showdown.Converter()).makeHtml(markdown);
+};
+
+let isMarkdownPreview: boolean = false;
+
+const toggleMarkdown = (): void => {
+    isMarkdownPreview = !isMarkdownPreview;
+    if (isMarkdownPreview) {
+        document.getElementById('preview-markdown').innerText = '[Source | F9]';
+        document.getElementById('editor').style.display = 'none';
+        document.getElementById('markdown-preview').innerHTML = convertToHtml(getText());
+        document.getElementById('markdown-preview').style.display = 'block';
+    }
+    else {
+        document.getElementById('preview-markdown').innerText = '[Preview | F9]';
+        document.getElementById('editor').style.display = 'block';
+        document.getElementById('markdown-preview').style.display = 'none';
+        focusOnEditor();
+    }
+}
+
+const toggleMarkdownHotKey = (event: any): void => {
+    if (event.key == 'F9') {
+        toggleMarkdown();
+        event.preventDefault();
+    }
+    else if (event.key === 'F12') {
+        api().toggleDevTools();
+        event.preventDefault();
+    }
+};
+
 const main = (): void => {
     updateTime();
     updateCounters();
@@ -152,6 +184,9 @@ const main = (): void => {
     document.getElementById('save-file').addEventListener('click', onSaveFile(false));
     document.getElementById('save-file-as').addEventListener('click', onSaveFile(true));
     document.getElementById('load-file').addEventListener('click', onLoadFile);
+
+    document.getElementById('preview-markdown').addEventListener('click', toggleMarkdown);
+    document.addEventListener('keydown', toggleMarkdownHotKey);
 }
 
 main();

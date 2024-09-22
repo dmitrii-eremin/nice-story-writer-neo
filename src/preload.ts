@@ -24,5 +24,5 @@ const loadFile = async (): Promise<string> => {
 contextBridge.exposeInMainWorld('nswApi', {
     toggleDevTools,
     saveFile,
-    loadFile
+    loadFile,
 })

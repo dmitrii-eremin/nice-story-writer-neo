@@ -2,31 +2,33 @@
 <html>
 
 <body>
-  <section>
-    <header>
-      <div class="status-bar">
-        <span>Time: <span id="current-time"></span></span>
-        <span><a href="javascript:void(0)" id="new-file">[New]</a></span>
-        <span><a href="javascript:void(0)" id="save-file">[Save]</a></span>
-        <span><a href="javascript:void(0)" id="save-file-as">[Save As]</a></span>
-        <span><a href="javascript:void(0)" id="load-file">[Load]</a></span>
-        <span><a href="https://dmitrii-eremin.github.io/nice-story-writer-neo" target="_blank">[Website]</a></span>
-      </div>
-    </header>
-    <div class="main-editable-area">
-      <textarea id="editor" spellcheck="false"></textarea>
+  <header>
+    <div class="status-bar">
+      <span>Time: <span id="current-time"></span></span>
+      <span><a href="javascript:void(0)" id="new-file">[New]</a></span>
+      <span><a href="javascript:void(0)" id="save-file">[Save | F5]</a></span>
+      <span><a href="javascript:void(0)" id="save-file-as">[Save As]</a></span>
+      <span><a href="javascript:void(0)" id="load-file">[Load]</a></span>
+      <span><a href="javascript:void(0)" id="preview-markdown">[Preview | F9]</a></span>
+      <span><a href="https://dmitrii-eremin.github.io/nice-story-writer-neo" target="_blank">[Website]</a></span>
     </div>
-    <footer>
-      <div class="status-bar">
-        <span>Words: <span id="number-of-words">0</span></span>
-        <span>Pages: <span id="number-of-pages">0</span></span>
-        <span>Lines: <span id="number-of-lines">0</span></span>
-        <span>Paragraphs: <span id="number-of-paragraphs">0</span></span>
-        <span>Characters: <span id="number-of-characters">0</span></span>
-        <span>[F9] - Insert time</span>
-      </div>
-    </footer>
-  </section>
+  </header>
+
+  <main>
+    <textarea id="editor" spellcheck="false"></textarea>
+    <div id="markdown-preview"></div>
+  </main>
+
+  <footer>
+    <div class="status-bar">
+      <span>Words: <span id="number-of-words">0</span></span>
+      <span>Pages: <span id="number-of-pages">0</span></span>
+      <span>Lines: <span id="number-of-lines">0</span></span>
+      <span>Paragraphs: <span id="number-of-paragraphs">0</span></span>
+      <span>Characters: <span id="number-of-characters">0</span></span>
+      <span>[F10] - Insert time</span>
+    </div>
+  </footer>
 </body>
 
 </html>

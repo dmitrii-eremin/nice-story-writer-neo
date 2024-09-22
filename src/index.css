@@ -1,87 +1,80 @@
-html, body
-{
-    min-height: 100%;
-    padding: 0;
+* {
     margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-body
-{
+html,
+body {
+    height: 100%;
+
     background-color: black;
     color: #fff;
 }
 
-footer, header
-{
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+header,
+main,
+footer {
+    padding: 10px;
+    text-align: center;
+}
+
+main {
+    flex: 1;
+    overflow-y: auto;
+    /* Ensures content is scrollable when it overflows */
+}
+
+footer {
+    background-color: #333;
+    color: white;
+    position: sticky;
+    bottom: 0;
+    width: 100%;
+    z-index: 100;
+}
+
+header,
+footer {
     background-color: #101010;
     color: #404040;
     font-family: "Hack", "Courier New", "monospace";
     font-size: 1rem;
-    position: relative;
-}
-
-
-header
-{
-    margin-top: -2rem;
     height: 2rem;
 }
 
-footer
-{
-    margin-bottom: -1.9rem;
-    height: 2rem;
-}
-
-footer span:not(:first-child), header span:not(:first-child)
-{
+footer span:not(:first-child),
+header span:not(:first-child) {
     margin-left: 3rem;
 }
 
-section
-{
-    padding-top: 2rem;
-    padding-bottom: 2rem;
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
+main p {
+    margin-bottom: 20px;
+    /* Adds spacing for content */
 }
 
-.status-bar
-{
+.status-bar {
+    text-align: left;
     margin: 0;
     margin-left: 1rem;
-    position: absolute;
-    top: 50%;
-    -ms-transform: translateY(-50%);
-    transform: translateY(-50%);
-
     width: 95%;
 }
 
-.status-bar .right
-{
-    position: absolute;
-    right: 1rem;
-}
-
-.status-bar a
-{
+.status-bar a {
     color: #404040;
     text-decoration: none;
 }
 
-.main-editable-area
-{
-    width: 900px;
+#editor,
+#markdown-preview {
     margin: 0 auto;
-    height: 100%;
-}
-
-.main-editable-area textarea
-{
+    max-width: 900px;
     background: black;
     color: #B3A000;
     font-family: "Hack", "Courier New", "monospace";
@@ -98,7 +91,11 @@ section
     -ms-overflow-style: none;
 }
 
-.main-editable-area textarea::-webkit-scrollbar
-{
+#editor::-webkit-scrollbar {
     width: 0 !important;
+}
+
+#markdown-preview {
+    text-align: justify;
+    display: none;
 }
